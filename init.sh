@@ -1,5 +1,13 @@
 neofetch
 
+# Setup pinentry for potential SSH.
+export GPG_TTY=$(tty)
+if [[ -n "$SSH_CONNECTION" ]] ;then
+    echo "SSH Mode Enabled"
+    export PINENTRY_USER_DATA="USE_CURSES=1"
+fi
+echo "UPDATESTARTUPTTY" | gpg-connect-agent > /dev/null 2>&1
+
 # Add SDKs
 for folder in /opt/SDKs/*; do
 	if [ -d "$folder" ]; then
